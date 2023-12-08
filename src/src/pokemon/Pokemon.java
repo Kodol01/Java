@@ -109,4 +109,9 @@ public abstract class Pokemon {
         System.out.println("날아갑니다");
     }
 
+    public void evolution(){
+        this.setHp(this.getHp() + 30);
+        this.setDefenceRate(this.getDefenceRate() + 30);
+    }
+
 }

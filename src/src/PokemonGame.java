@@ -30,7 +30,7 @@ public class PokemonGame {
     public static void main(String[] args) {
         System.out.println("포켓몬스터 게임을 시작합니다");
         Scanner s = new Scanner(System.in);
-        System.out.print("플레이어 포켓몬스터를 고르세요. 1) 피카츄   2) 꼬부기   3) 리자몽 : ");
+        System.out.print("플레이어 포켓몬스터를 고르세요. 1) 피카츄   2) 꼬부기   3) 리자드 : ");
 
         Pokemon player;
         while(true){
@@ -76,8 +76,8 @@ public class PokemonGame {
                 switch (menu) {
                     case 1:
 
+                        while(true){
                         player.getSkills().forEach((k, v) -> System.out.println(k + ") " + v));
-
                         player.attack(enemy, s.nextInt());
                         if (enemy.getHp() <= 0) {
                             int winpoint = (int)(Math.random()*5+1);
@@ -91,6 +91,7 @@ public class PokemonGame {
                             System.out.println("당신은 사망하셨습니다. RIP");
                             System.out.println("게임을 종료합니다.");
                             break;
+                        }
                         }
 
                         break;
@@ -124,7 +125,10 @@ public class PokemonGame {
                             System.out.println("xp가 부족하여 진화할 수 없습니다. 더 필요한 xp : " + (10-player.getXp()));
                             break;
                         }
-                        System.out.println("진화를 시작합니다!!!");
+                        System.out.println("현재 가지고 있는 xp : " + player.getXp());
+                        player.setXp(player.getXp()-10);
+                        player.evolution();
+                        System.out.println(player.getName() + "(으)로 진화에 성공하였습니다.!!! 남은 xp : " + player.getXp());
                         break;
 
 
@@ -133,6 +137,12 @@ public class PokemonGame {
                         break;
                 }
             if (player.getHp() <= 0) {
+                break;
+            }
+            if(player.getXp() > 20){
+                System.out.println("당신의 " + player.getName() + "(는)은 스테이지를 클리어하였습니다.");
+                System.out.println("게임을 종료합니다.");
+                continued = false;
                 break;
             }
 
