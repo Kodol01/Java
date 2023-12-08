@@ -83,8 +83,6 @@ public abstract class Pokemon {
 //        System.out.println("공격 시전!");
 //    }
     public abstract void attack();  // 추상메서드
-
-    //public abstract void attack(Pokemon p, int s);  // 추상메서드
     public void attack(Pokemon target, int skill){
         int temporary_attack_rate = (this.getAttackRate() + this.specialAttackRate.get(this.skills.get(skill))) - target.getDefenceRate();
         if (temporary_attack_rate < 0){

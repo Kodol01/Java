@@ -13,7 +13,6 @@ import java.util.function.*;
 public class PokemonGame {
     static Pokemon enemy = null;
     private static void produceEnemyPokemon(){
-        //Pokemon enemy = new Pikachu(new NoFly());
 
         System.out.print("야생의 포켓몬이 나타났습니다! ");
         int number = (int)(Math.random() * 3);  // 0, 1, 2
@@ -66,46 +65,34 @@ public class PokemonGame {
         produceEnemyPokemon();
 
         while(true){
-            System.out.print("1) 전투   2) 도망   3) 물약   4) 종료 : ");
+            System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : ");
             int menu = s.nextInt();
-            if(menu == 4)
+            if(menu == 5)
                 break;  // while구문 탈출
             switch (menu){
                 case 1:
-//                    for(String skill : player.getSkills())
-//                        System.out.print(skill + " ");
-//                    for(int i=0; i<3; i++)
-//                        System.out.print((i + 1) + ") " + player.getSkills().get(i) + " ");
 
-//                    for(Map.Entry<Integer, String> mapSkill : player.getSkills().entrySet()){
-//                        System.out.println(mapSkill.getKey() + ") " + mapSkill.getValue());
-//                    }
                     player.getSkills().forEach((k, v)-> System.out.println(k + ") " + v));
 
-                    //String temp = s.next();  // feat. 김남희
                     player.attack(enemy, s.nextInt());
+                    if(enemy.getHp() <= 0) {
+                        break;
+                    }
+
                     enemy.attack(player, (int)(Math.random()*3)+1);
-//                    enemy.attack(player, "어떤 공격");
+                    if(player.getHp() <= 0) {
+                        break;
+                    }
+
                     break;
+
                 case 2:
                     player.performFlyable();
                     System.out.println("다른 지역으로 이동합니다");
                     produceEnemyPokemon();
                     break;
+
                 case 3:
-//                    UnaryOperator<Integer> healPotion = hp ->  hp + 50;
-//                    player.setHp(healPotion.apply(player.getHp()));
-
-//                    Function<Integer, Integer> healPotion = hp -> hp + 50;
-//                    player.setHp(healPotion.apply(player.getHp()));
-
-//                    Supplier<Integer> healPotion = () -> 50;
-//                    player.setHp(healPotion.get() + player.getHp());
-
-//                    Consumer<Integer> healPotion = hp -> {
-//                        player.setHp(hp + 50);
-//                    };
-//                    healPotion.accept(player.getHp());
 
                     Predicate<Integer> healPotion = hp -> {
                         if(hp > 0)
@@ -121,6 +108,11 @@ public class PokemonGame {
                         System.out.println("당신은 사망하셨습니다. RIP");
                     }
                     break;
+
+                case 4:
+
+
+
                 default:
                     System.out.println("메뉴에서 선택해주세요~");
                     break;

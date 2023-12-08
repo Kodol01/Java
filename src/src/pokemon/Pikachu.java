@@ -46,8 +46,4 @@ public class Pikachu extends Pokemon {
         System.out.println(this.getName() + "이(가) 전기장판 공격을 시전!");
     }
 
-    public void attack(Pokemon target, int skill) {
-        super.attack(target, skill);
-        System.out.println("전기속성 공격...");
-    }
 }

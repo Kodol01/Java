@@ -32,8 +32,4 @@ public class Squirtle extends Pokemon {
         System.out.println(this.getName() + "이(가) 물장판 공격을 시전!");
     }
 
-    public void attack(Pokemon target, int skill) {
-        super.attack(target, skill);
-        System.out.println("물속성 공격...");
-    }
 }
