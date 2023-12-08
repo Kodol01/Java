@@ -61,62 +61,93 @@ public class PokemonGame {
             }
         }
 
-        // 적 포켓몬 생성 코드는 외부 메서드로 이동
-        produceEnemyPokemon();
+        Boolean continued = true;
 
-        while(true){
-            System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : ");
-            int menu = s.nextInt();
-            if(menu == 5)
-                break;  // while구문 탈출
-            switch (menu){
+        while(continued) {
+            // 적 포켓몬 생성 코드는 외부 메서드로 이동
+            produceEnemyPokemon();
+
+                System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : ");
+                int menu = s.nextInt();
+                if (menu == 5) {
+                    System.out.println("게임을 종료합니다.");
+                    break;  // while구문 탈출
+                }
+                switch (menu) {
+                    case 1:
+
+                        player.getSkills().forEach((k, v) -> System.out.println(k + ") " + v));
+
+                        player.attack(enemy, s.nextInt());
+                        if (enemy.getHp() <= 0) {
+                            int winpoint = (int)(Math.random()*5+1);
+                            player.setXp(player.getXp()+winpoint);
+                            System.out.println(winpoint + "xp 획득! 총 xp : " + player.getXp());
+                            break;
+                        }
+
+                        enemy.attack(player, (int) (Math.random() * 3) + 1);
+                        if (player.getHp() <= 0) {
+                            System.out.println("당신은 사망하셨습니다. RIP");
+                            System.out.println("게임을 종료합니다.");
+                            break;
+                        }
+
+                        break;
+
+                    case 2:
+                        player.performFlyable();
+                        System.out.println("다른 지역으로 이동합니다");
+                        produceEnemyPokemon();
+                        break;
+
+                    case 3:
+
+                        Predicate<Integer> healPotion = hp -> {
+                            if (hp > 0)
+                                return true;
+                            else
+                                return false;
+                        };
+                        if (healPotion.test(player.getHp())) {
+                            System.out.println("물약을 마십니다! +50");
+                            player.setHp(player.getHp() + 50);
+                            System.out.println(player.getName() + "의 체력은 " + player.getHp() + "입니다!");
+                        } else {
+                            System.out.println("당신은 사망하셨습니다. RIP");
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("진화하려면 10xp가 필요합니다. 현재 당신의 xp는 " + player.getXp() + "입니다.");
+                        if(player.getXp() < 10){
+                            System.out.println("xp가 부족하여 진화할 수 없습니다. 더 필요한 xp : " + (10-player.getXp()));
+                            break;
+                        }
+                        System.out.println("진화를 시작합니다!!!");
+                        break;
+
+
+                    default:
+                        System.out.println("메뉴에서 선택해주세요~");
+                        break;
+                }
+            if (player.getHp() <= 0) {
+                break;
+            }
+
+            System.out.println("계속 하시겠습니까?");
+            System.out.println("1) 예  2) 아니요");
+            int choose = s.nextInt();
+            switch (choose){
                 case 1:
-
-                    player.getSkills().forEach((k, v)-> System.out.println(k + ") " + v));
-
-                    player.attack(enemy, s.nextInt());
-                    if(enemy.getHp() <= 0) {
-                        break;
-                    }
-
-                    enemy.attack(player, (int)(Math.random()*3)+1);
-                    if(player.getHp() <= 0) {
-                        break;
-                    }
-
                     break;
 
                 case 2:
-                    player.performFlyable();
-                    System.out.println("다른 지역으로 이동합니다");
-                    produceEnemyPokemon();
-                    break;
-
-                case 3:
-
-                    Predicate<Integer> healPotion = hp -> {
-                        if(hp > 0)
-                            return true;
-                        else
-                            return false;
-                    };
-                    if(healPotion.test(player.getHp())) {
-                        System.out.println("물약을 마십니다! +50");
-                        player.setHp(player.getHp() + 50);
-                        System.out.println(player.getName() + "의 체력은 " + player.getHp() + "입니다!");
-                    }else{
-                        System.out.println("당신은 사망하셨습니다. RIP");
-                    }
-                    break;
-
-                case 4:
-
-
-
-                default:
-                    System.out.println("메뉴에서 선택해주세요~");
-                    break;
+                    System.out.println("게임을 종료합니다.");
+                    continued = false;
             }
+
         }
     }
 }

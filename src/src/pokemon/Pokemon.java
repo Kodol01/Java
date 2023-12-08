@@ -11,6 +11,15 @@ public abstract class Pokemon {
     private int attackRate;
     private int defenceRate;
 
+    private int xp;
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
 //    protected String[] skills;
 //    protected Integer[] specialAttackRate;
 

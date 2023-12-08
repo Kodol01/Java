@@ -13,6 +13,7 @@ public class Charizard extends Pokemon {
         this.setName("리자몽");
         this.setAttackRate((int)(Math.random()*11)+74);  // 2차 진화 포켓몬을 공격력 레인지가 10
         this.setHp(78);
+        this.setXp(0);
         this.setDefenceRate(78);
 
         this.skills = new HashMap<>();

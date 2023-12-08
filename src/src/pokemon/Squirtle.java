@@ -18,6 +18,7 @@ public class Squirtle extends Pokemon {
         this.setName("꼬부기");
         this.setAttackRate((int)(Math.random()*4)+45);  // 0차 진화 포켓몬을 공격력 레인지가 3
         this.setHp(44);
+        this.setXp(0);
         this.setDefenceRate(65);
 
 //        this.skills = new ArrayList<>(Arrays.asList("물대포", "거품", "하이드로펌프"));
