@@ -54,8 +54,8 @@ public class Charizard extends Pokemon {
 
     @Override
     public void evolution() {
-        super.evolution();
-        this.skills.put(4, "블라스트번");
+        super.evolution(); //부모 클래스의 진화 메서드 실행!
+        this.skills.put(4, "블라스트번"); //각 스킬을 추가하였습니다.
         this.specialAttackRate.put("블라스트번", 100);
     }
 }

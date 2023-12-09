@@ -30,7 +30,7 @@ public class Squirtle extends Pokemon {
         System.out.println(this.getName() + "이(가) 물장판 공격을 시전!");
     }
 
-    public void evolution() {
+    public void evolution() { //리자드 클래스 참고
         super.evolution();
         this.skills.put(4, "하이드로캐논");
         this.specialAttackRate.put("하이드로캐논", 100);

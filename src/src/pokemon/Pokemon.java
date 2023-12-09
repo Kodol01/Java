@@ -13,7 +13,7 @@ public abstract class Pokemon {
     private int attackRate;
     private int defenceRate;
 
-    private int xp;
+    private int xp = 0; //진화를 구현하기 위해 xp 변수를 생성하였고 0으로 초기화하였습니다.
 
     public int getXp() {
         return xp;
@@ -22,17 +22,12 @@ public abstract class Pokemon {
     public void setXp(int xp) {
         this.xp = xp;
     }
-//    protected String[] skills;
-//    protected Integer[] specialAttackRate;
-
-//    protected List<String> skills;
-//    protected List<Integer> specialAttackRate;
 
     protected Map<Integer, String> skills ;
     protected Map<String, Integer> specialAttackRate;
 
 
-    Flyable flyable;  // Association (has a)
+    Flyable flyable;
 
     public Pokemon() {
     }
@@ -44,10 +39,6 @@ public abstract class Pokemon {
     public Map<Integer, String> getSkills() {
         return skills;
     }
-
-    //    public List<String> getSkills() {
-//        return skills;
-//    }
     public void setFlyable(Flyable flyable) {
         this.flyable = flyable;
     }
@@ -89,11 +80,7 @@ public abstract class Pokemon {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public void attack(){
-//        System.out.println("공격 시전!");
-//    }
-    public abstract void attack();  // 추상메서드
+    public abstract void attack();
     public void attack(Pokemon target, int skill){
         int temporary_attack_rate = (this.getAttackRate() + this.specialAttackRate.get(this.skills.get(skill))) - target.getDefenceRate();
         if (temporary_attack_rate < 0){
@@ -114,16 +101,16 @@ public abstract class Pokemon {
     public void evolution(){
         //각 포켓몬 별로 진화
         Map<String, String> evPokemon = Map.of("피카츄", "라이츄", "리자드", "리자몽", "꼬부기", "어니부기");
-        Stream<Map.Entry<String, String>> st = evPokemon.entrySet().stream();
-        st.forEach(n -> {
-            if(n.getKey().equals(this.getName())){
+        Stream<Map.Entry<String, String>> st = evPokemon.entrySet().stream(); //Map을 스트림으로 변환하였습니다.
+        st.forEach(n -> { //스트림의 각 값들을 동작시키게 forEach를 활용하였고, 플레이어 캐릭터에 맞게 진화캐릭터를 출력하게 설계하였습니다.
+            if(n.getKey().equals(this.getName())){ //forEach문은 Consumer 람다함수 사용가능
                 System.out.print(n.getKey() + "에서 " + n.getValue() + "(으)로 진화하였습니다. ");
                 this.setName(n.getValue());
             }
         });
         this.setHp(this.getHp() + 30);
         this.setDefenceRate(this.getDefenceRate() + 30);
-        isEvolution = true;
+        isEvolution = true; //한번 진화되었으니 해당 변수를 true로 변경하여 두번 진화되지 않게 설정했습니다.
     }
 
 }

@@ -7,12 +7,11 @@ import java.util.HashMap;
 
 public class Pikachu extends Pokemon {
     public Pikachu(Flyable f) {
-        super(f); // call parent's constructor
+        super(f);
         System.out.println("피카피카~");
         this.setName("피카츄");
-        this.setAttackRate((int)(Math.random()*6)+50);  // 1차 진화 포켓몬을 공격력 레인지가 5
+        this.setAttackRate((int)(Math.random()*6)+50);
         this.setHp(120);
-        this.setXp(0);
         this.setDefenceRate(40);
 
         this.skills = new HashMap<>();
@@ -32,7 +31,7 @@ public class Pikachu extends Pokemon {
         System.out.println(this.getName() + "이(가) 전기장판 공격을 시전!");
     }
 
-    public void evolution() {
+    public void evolution() { //리자드 클래스 참고
         super.evolution();
         this.skills.put(4, "아이언태일");
         this.specialAttackRate.put("아이언태일", 100);
