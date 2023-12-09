@@ -2,8 +2,10 @@ package pokemon;
 
 import fly.Flyable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public abstract class Pokemon {
     private int hp;
@@ -63,7 +65,7 @@ public abstract class Pokemon {
         this.defenceRate = defenceRate;
     }
 
-
+    public boolean isEvolution = false;
     public int getHp() {
         return hp;
     }
@@ -110,8 +112,18 @@ public abstract class Pokemon {
     }
 
     public void evolution(){
+        //각 포켓몬 별로 진화
+        Map<String, String> evPokemon = Map.of("피카츄", "라이츄", "리자드", "리자몽", "꼬부기", "어니부기");
+        Stream<Map.Entry<String, String>> st = evPokemon.entrySet().stream();
+        st.forEach(n -> {
+            if(n.getKey().equals(this.getName())){
+                System.out.print(n.getKey() + "에서 " + n.getValue() + "(으)로 진화하였습니다. ");
+                this.setName(n.getValue());
+            }
+        });
         this.setHp(this.getHp() + 30);
         this.setDefenceRate(this.getDefenceRate() + 30);
+        isEvolution = true;
     }
 
 }

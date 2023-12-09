@@ -11,7 +11,7 @@ public class Pikachu extends Pokemon {
         System.out.println("피카피카~");
         this.setName("피카츄");
         this.setAttackRate((int)(Math.random()*6)+50);  // 1차 진화 포켓몬을 공격력 레인지가 5
-        this.setHp(35);
+        this.setHp(120);
         this.setXp(0);
         this.setDefenceRate(40);
 
@@ -30,6 +30,12 @@ public class Pikachu extends Pokemon {
     @Override
     public void attack() {
         System.out.println(this.getName() + "이(가) 전기장판 공격을 시전!");
+    }
+
+    public void evolution() {
+        super.evolution();
+        this.skills.put(4, "아이언태일");
+        this.specialAttackRate.put("아이언태일", 100);
     }
 
 }

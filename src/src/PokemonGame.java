@@ -64,14 +64,13 @@ public class PokemonGame {
         Boolean continued = true;
 
         while(continued) {
-            // 적 포켓몬 생성 코드는 외부 메서드로 이동
             produceEnemyPokemon();
 
                 System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : ");
                 int menu = s.nextInt();
                 if (menu == 5) {
                     System.out.println("게임을 종료합니다.");
-                    break;  // while구문 탈출
+                    break;
                 }
                 switch (menu) {
                     case 1:
@@ -99,7 +98,6 @@ public class PokemonGame {
                     case 2:
                         player.performFlyable();
                         System.out.println("다른 지역으로 이동합니다");
-                        produceEnemyPokemon();
                         break;
 
                     case 3:
@@ -120,15 +118,21 @@ public class PokemonGame {
                         break;
 
                     case 4:
+                        if(player.isEvolution){
+                            System.out.println("이미 진화되어 진화를 진행할 수 없습니다.");
+                            break;
+                        }
                         System.out.println("진화하려면 10xp가 필요합니다. 현재 당신의 xp는 " + player.getXp() + "입니다.");
+                        System.out.println();
                         if(player.getXp() < 10){
                             System.out.println("xp가 부족하여 진화할 수 없습니다. 더 필요한 xp : " + (10-player.getXp()));
                             break;
                         }
-                        System.out.println("현재 가지고 있는 xp : " + player.getXp());
                         player.setXp(player.getXp()-10);
-                        player.evolution();
-                        System.out.println(player.getName() + "(으)로 진화에 성공하였습니다.!!! 남은 xp : " + player.getXp());
+                        if(!player.isEvolution){
+                            player.evolution();
+                            System.out.println("남은 xp : " + player.getXp());
+                        }
                         break;
 
 

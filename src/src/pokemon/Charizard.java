@@ -55,7 +55,6 @@ public class Charizard extends Pokemon {
     @Override
     public void evolution() {
         super.evolution();
-        this.setName("리자몽");
         this.skills.put(4, "블라스트번");
         this.specialAttackRate.put("블라스트번", 100);
     }
