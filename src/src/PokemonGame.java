@@ -16,7 +16,7 @@ public class PokemonGame {
     private static void produceEnemyPokemon(){
 
         System.out.print("야생의 포켓몬이 나타났습니다! ");
-        int number = (int)(Math.random() * 3);  // 0, 1, 2
+        int number = (int)(Math.random() * 3);
         if(number == 0){
             enemy = new Pikachu(new NoFly());
         } else if (number == 1) {
@@ -64,7 +64,7 @@ public class PokemonGame {
         while(continued) { //적 생성시 부터 while문을 돌려 전투가 한번 끝나면 죽지 않는 이상 계속 전투가 이어지게 설계하였습니다.
             produceEnemyPokemon(); //적 생성
 
-                System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : ");
+                System.out.print("1) 전투   2) 도망   3) 물약   4) 진화   5) 종료  : "); //진화도 선택할 수 있도록 진화 선택 탭을 추가하였습니다.
                 int menu = s.nextInt();
                 if (menu == 5) {
                     System.out.println("게임을 종료합니다.");
@@ -78,8 +78,8 @@ public class PokemonGame {
                             player.attack(enemy, s.nextInt());
                             if (enemy.getHp() <= 0) {
                                 int winpoint = (int)(Math.random()*5+1);
-                                player.setXp(player.getXp()+winpoint);
-                                System.out.println(winpoint + "xp 획득! 총 xp : " + player.getXp());
+                                player.setXp(player.getXp()+winpoint); //Xp(경험치)라는 걸 추가로 사용해야 하기 때문에 넣었고 적을 죽이면 XP가 1~5까지 랜덤으로 추가됩니다.
+                                System.out.println(winpoint + "xp 획득! 총 xp : " + player.getXp()); //획득 Xp와 총 Xp를 둘다 알려줍니다.
                                 break;
                             }
 
@@ -145,8 +145,8 @@ public class PokemonGame {
                 break;
             }
 
-            System.out.println("계속 하시겠습니까?");
-            System.out.println("1) 예  2) 아니요");
+            System.out.println("계속 하시겠습니까?"); //포켓몬과의 전투 외 진화 등을 한턴을 돌게 되면 계속하겠냐는 문구가 뜹니다.
+            System.out.println("1) 예  2) 아니요"); //1번 선택 시 계속 진행, 2번 선택 시 게임을 종료합니다.
             int choose = s.nextInt();
             switch (choose){
                 case 1:

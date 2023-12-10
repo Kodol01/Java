@@ -56,7 +56,7 @@ public abstract class Pokemon {
         this.defenceRate = defenceRate;
     }
 
-    public boolean isEvolution = false;
+    public boolean isEvolution = false; //진화 여부를 묻는 변수입니다. default 값은 false입니다.
     public int getHp() {
         return hp;
     }
